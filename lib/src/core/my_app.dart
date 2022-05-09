@@ -1,3 +1,6 @@
+import 'package:fermer_app/src/ui/auth/login_screen.dart';
+
+import '../ui/auth/auth_screen.dart';
 import '../ui/home/home_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +15,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomeScreen(),
+      routes: {
+        '/auth': (context) => const AuthScreen(),
+        '/login': (context) => const LoginScreen(),
+        '/home': (context) => const HomeScreen(),
+      },
+      initialRoute: '/home',
     );
   }
 }
