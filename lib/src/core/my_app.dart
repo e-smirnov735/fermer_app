@@ -1,3 +1,5 @@
+import 'package:fermer_app/src/core/styles/app_colors.dart';
+import 'package:fermer_app/src/core/styles/app_theme.dart';
 import 'package:fermer_app/src/ui/auth/login_screen.dart';
 
 import '../ui/auth/auth_screen.dart';
@@ -12,15 +14,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: AppTheme.lightTheme,
       routes: {
         '/auth': (context) => const AuthScreen(),
         '/login': (context) => const LoginScreen(),
         '/home': (context) => const HomeScreen(),
       },
-      initialRoute: '/home',
+      initialRoute: '/login',
     );
   }
 }
