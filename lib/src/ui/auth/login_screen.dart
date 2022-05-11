@@ -1,10 +1,8 @@
-import 'package:fermer_app/src/core/styles/app_colors.dart';
-import 'package:fermer_app/src/ui/auth/widgets/auth_form_widget.dart';
+import 'package:fermer_app/src/ui/auth/widgets/login_form_widget.dart';
 import 'package:fermer_app/src/ui/auth/widgets/auth_header_widget.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-import 'widgets/auth_account_text_widget.dart';
+import 'widgets/login_account_text_widget.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -27,10 +25,10 @@ class LoginScreen extends StatelessWidget {
             SizedBox(height: 80),
             AuthHeaderWidget(),
             Spacer(),
-            AuthFormWidget(),
+            LoginFormWidget(),
             SizedBox(height: 20),
-            AuthAccountTextWidget(),
-            SizedBox(height: 79),
+            LoginAccountTextWidget(),
+            SizedBox(height: 40),
           ],
         ),
       ),

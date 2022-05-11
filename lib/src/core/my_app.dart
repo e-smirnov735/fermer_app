@@ -1,8 +1,7 @@
-import 'package:fermer_app/src/core/styles/app_colors.dart';
 import 'package:fermer_app/src/core/styles/app_theme.dart';
 import 'package:fermer_app/src/ui/auth/login_screen.dart';
 
-import '../ui/auth/auth_screen.dart';
+import '../ui/auth/register_screen.dart';
 import '../ui/home/home_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +15,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: AppTheme.lightTheme,
       routes: {
-        '/auth': (context) => const AuthScreen(),
+        '/register': (context) => const RegisterScreen(),
         '/login': (context) => const LoginScreen(),
         '/home': (context) => const HomeScreen(),
       },

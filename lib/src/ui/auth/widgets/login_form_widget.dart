@@ -1,24 +1,31 @@
+import 'package:fermer_app/src/core/styles/app_button_styles.dart';
 import 'package:fermer_app/src/core/styles/app_colors.dart';
 import 'package:flutter/material.dart';
 
-class AuthFormWidget extends StatefulWidget {
-  const AuthFormWidget({Key? key}) : super(key: key);
+class LoginFormWidget extends StatefulWidget {
+  const LoginFormWidget({Key? key}) : super(key: key);
 
   @override
-  State<AuthFormWidget> createState() => _AuthFormWidgetState();
+  State<LoginFormWidget> createState() => _LoginFormWidgetState();
 }
 
-class _AuthFormWidgetState extends State<AuthFormWidget> {
+class _LoginFormWidgetState extends State<LoginFormWidget> {
   late TextEditingController _emailController;
   late TextEditingController _passwordController;
   String _errorText = '';
+  bool _isObscure = true;
+
+  void showObscureText() {
+    setState(() {
+      _isObscure = !_isObscure;
+    });
+  }
 
   void _checkAuthData(BuildContext context) {
     final email = _emailController.text;
     final password = _passwordController.text;
 
     if (email == 'admin' && password == 'admin') {
-      print('test auth');
       Navigator.of(context).pushNamedAndRemoveUntil('/home', (route) => false);
     } else {
       setState(() {
@@ -41,7 +48,6 @@ class _AuthFormWidgetState extends State<AuthFormWidget> {
     super.dispose();
   }
 
-  bool isOnTap = false;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -50,24 +56,43 @@ class _AuthFormWidgetState extends State<AuthFormWidget> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           TextField(
-            decoration: InputDecoration(
-                hintText: 'Email', prefixIcon: Icon(Icons.email_outlined)),
+            decoration: const InputDecoration(
+              isCollapsed: true,
+              hintText: 'Почта',
+              prefixIcon: Icon(Icons.email_outlined),
+            ),
+            textAlignVertical: TextAlignVertical.center,
             cursorColor: AppColors.black,
             controller: _emailController,
-            onTap: () => setState(() {
-              isOnTap = !isOnTap;
-            }),
+            keyboardType: TextInputType.emailAddress,
           ),
           const SizedBox(height: 16),
-          TextField(
-            keyboardType: TextInputType.emailAddress,
-            controller: _passwordController,
-            cursorColor: AppColors.black,
-            decoration: const InputDecoration(
-              hintText: 'Password',
-              prefixIcon: Icon(Icons.lock_outlined),
+          SizedBox(
+            height: 60,
+            child: TextField(
+              textAlignVertical: TextAlignVertical.center,
+              controller: _passwordController,
+              cursorColor: AppColors.black,
+              decoration: InputDecoration(
+                isCollapsed: true,
+                hintText: 'Пароль',
+                prefixIcon: const Icon(
+                  Icons.lock_outlined,
+                  size: 24,
+                ),
+                suffixIcon: IconButton(
+                  onPressed: () => showObscureText(),
+                  icon: Icon(
+                    _isObscure
+                        ? Icons.remove_red_eye_outlined
+                        : Icons.remove_red_eye_sharp,
+                    color: AppColors.grey,
+                    size: 24,
+                  ),
+                ),
+              ),
+              obscureText: _isObscure,
             ),
-            obscureText: true,
           ),
           const SizedBox(height: 16),
           Visibility(
@@ -75,15 +100,10 @@ class _AuthFormWidgetState extends State<AuthFormWidget> {
               child: Text(
                 _errorText,
                 textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.red),
+                style: const TextStyle(color: Colors.red),
               )),
           ElevatedButton(
-            style: ButtonStyle(
-              padding: MaterialStateProperty.all(
-                const EdgeInsets.symmetric(vertical: 15),
-              ),
-              backgroundColor: MaterialStateProperty.all(AppColors.primary),
-            ),
+            style: AppButtonStyle.inputStyle,
             onPressed: () {
               _checkAuthData(context);
             },

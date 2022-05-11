@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 import '../../../core/styles/app_colors.dart';
 
-class AuthAccountTextWidget extends StatelessWidget {
-  const AuthAccountTextWidget({
+class RegisterAccountTextWidget extends StatelessWidget {
+  const RegisterAccountTextWidget({
     Key? key,
   }) : super(key: key);
 
@@ -13,12 +13,16 @@ class AuthAccountTextWidget extends StatelessWidget {
     return RichText(
       text: TextSpan(
         children: [
-          TextSpan(text: 'Нет аккаунта?  '),
+          const TextSpan(text: 'Уже есть аккаунт?  '),
           TextSpan(
-            text: 'Зарегистрироваться',
+            text: 'Войти',
             style: const TextStyle(
                 color: AppColors.primary, decoration: TextDecoration.underline),
-            recognizer: TapGestureRecognizer()..onTap = () => print('tappppp'),
+            recognizer: TapGestureRecognizer()
+              ..onTap = () {
+                Navigator.pushNamedAndRemoveUntil(
+                    context, '/login', (route) => false);
+              },
           ),
         ],
       ),
